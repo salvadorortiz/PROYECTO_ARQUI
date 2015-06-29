@@ -752,29 +752,210 @@ CALL HORIZONTAL
 RET
 ;------------------------------------------------------------
 ;---------SUBRUTINAS OPCION 2--------------------------------    
-                                                                 
-OPCION2:                                                         
-CALL BORRAR_PANTALLA                                          
-CALL DECORACION                                               
-CALL TRIANGULO2                                               
-CALL C_OPUESTO2                                               
-CALL HIPOTENUSA2                                              
-CALL C_ADYACENTE2                                             
-CALL INICIAR_MOUSE                                            
-CALL BOTONES_OP2                                              
+;------------------------------------------------------------
+                                                                
+
+OPCION2:
+CALL VIDEO
+CALL CABECERA       
+CALL MENU2            
+CALL DECORACION
+CALL PEDIR_OPCION2                                                          
+                                              
+RET 
+
+
+FORM_RAZON:
+                                                                                                   
+CALL EJERCICIO1_1                                               
                                                               
-CALL EJERCICIO1_ENUNCIADO                                     
-CALL EJERCICIO1                                               
+CALL EJERCICIO1_2
+                                                                                       
+CALL EJERCICIO1_3                                                            
+
+RET      
+
+LADO_FALTANTE:
+
+CALL EJERCICIO2_1                                               
                                                               
-;CALL EJERCICIO2_ENUNCIADO                                    
-;CALL EJERCICIO2                                              
-;                                                             
-;CALL EJERCICIO3_ENUNCIADO                                    
-;CALL EJERCICIO3                                              
-                                                              
-RET                                                           
-                                                              
-                                                              
+CALL EJERCICIO2_2
+                                                                                       
+CALL EJERCICIO2_3
+
+
+RET
+
+
+
+MENU2:
+
+MOV DL,20
+MOV DH,06H
+CALL POSICION
+MOV BL,07H
+
+MOV AL,"E"
+CALL IMPRIMIR_C
+
+MOV AL,"L"
+CALL IMPRIMIR_C
+
+MOV AL,"E"
+CALL IMPRIMIR_C
+
+MOV AL,"G"
+CALL IMPRIMIR_C
+
+MOV AL,"I"
+CALL IMPRIMIR_C
+
+MOV AL,"R"
+CALL IMPRIMIR_C
+
+MOV AL," "
+CALL IMPRIMIR_C
+
+MOV AL,"E"
+CALL IMPRIMIR_C
+
+MOV AL,"L"
+CALL IMPRIMIR_C
+
+MOV AL," "
+CALL IMPRIMIR_C
+
+MOV AL,"T"
+CALL IMPRIMIR_C
+
+MOV AL,"I"
+CALL IMPRIMIR_C
+
+MOV AL,"P"
+CALL IMPRIMIR_C
+
+MOV AL,"O"
+CALL IMPRIMIR_C
+
+MOV AL," "
+CALL IMPRIMIR_C
+
+MOV AL,"D"
+CALL IMPRIMIR_C
+
+MOV AL,"E"
+CALL IMPRIMIR_C          
+          
+MOV AL," "
+CALL IMPRIMIR_C
+
+MOV AL,"E"
+CALL IMPRIMIR_C
+
+MOV AL,"J"
+CALL IMPRIMIR_C
+
+MOV AL,"E"
+CALL IMPRIMIR_C
+
+MOV AL,"R"
+CALL IMPRIMIR_C
+
+MOV AL,"C"
+CALL IMPRIMIR_C
+
+MOV AL,"I"
+CALL IMPRIMIR_C
+
+MOV AL,"C"
+CALL IMPRIMIR_C
+
+MOV AL,"I"
+CALL IMPRIMIR_C
+
+MOV AL,"O"
+CALL IMPRIMIR_C
+
+MOV DL,25
+MOV DH,11
+CALL POSICION
+MOV DX, OFFSET TXT_EJE_OP1
+CALL IMPRIMIR
+
+MOV DL,25
+MOV DH,14
+CALL POSICION
+MOV DX, OFFSET TXT_EJE_OP2
+CALL IMPRIMIR
+
+MOV DL,25
+MOV DH,17
+CALL POSICION
+MOV DX, OFFSET TXT_EJE_OP3
+CALL IMPRIMIR
+
+MOV DL,67
+MOV DH,28
+CALL POSICION
+MOV BL,07H
+MOV AL,"S"
+CALL IMPRIMIR_C
+
+MOV AL,"A"   
+CALL IMPRIMIR_C
+
+MOV AL,"L"
+CALL IMPRIMIR_C
+
+MOV AL,"I"
+CALL IMPRIMIR_C
+
+MOV AL,"R"
+CALL IMPRIMIR_C
+
+MOV AL," "
+CALL IMPRIMIR_C
+
+MOV AL,"("
+CALL IMPRIMIR_C
+
+MOV AL,"E"
+CALL IMPRIMIR_C
+
+MOV AL,"S"
+CALL IMPRIMIR_C
+
+MOV AL,"C"
+CALL IMPRIMIR_C
+       
+MOV AL,")"
+CALL IMPRIMIR_C
+
+
+
+RET 
+
+
+PEDIR_OPCION2:
+CALL TECLADO
+CMP AL,"1"
+JE EJE_OP1 
+CMP AL,"2"
+JE EJE_OP2
+CMP AL,"3"
+JE EJE_OP3
+CMP AL,1BH ;TECLA ESC
+JE SALIR_PO2 
+EJE_OP1: CALL FORM_RAZON
+JMP SALIR_PO
+EJE_OP2: CALL LADO_FALTANTE
+JMP SALIR_PO                        
+EJE_OP3: CALL INICIO
+SALIR_PO2:
+RET 
+
+
+
 EJERCICIO1_ENUNCIADO:                                         
                                                               
 MOV DH,2D                                                     
@@ -806,14 +987,68 @@ MOV DX, OFFSET TXT_COSENO
 CALL IMPRIMIR                                                 
                                                               
 MOV DH,8D                                                     
-MOV DL,19D                                                    
+MOV DL,20D                                                    
 CALL POSICION                                                 
 MOV AL,'='                                                    
 MOV BL,07H                                                    
 CALL IMPRIMIR_C                                               
                                                               
 RET                                                           
+                                                                                                                      
                                                               
+EJE1:                                                   
+                                                              
+MOV SI, 00H                                                   
+CALL VER_MOUSE                                                
+MOV SI, 01H                                                   
+CALL VER_MOUSE                                                
+CALL RES_EJE1                                                 
+CALL BOTONES_OP2_FIN                                          
+                                                              
+CALL VER_MOUSE_FIN                                            
+                                                              
+RET
+
+
+RES_EJE1:                                                     
+;00 COPUESTO                                                  
+;01 CADYACENTE                                                
+;02 HIPOTENUSA                                                
+MOV BH,[0600H]                                                
+MOV BL,[0602H]                                                
+                                                              
+CMP BH, 01H                                                   
+JNE E1_INC                                                    
+CMP BL, 02H                                                   
+JNE E1_INC
+MOV [0610H],01H                                                    
+CALL CORRECTO                                                 
+JMP SALIR_RES_EJE1                                            
+                                                              
+E1_INC:
+MOV [0610H],00H                                                       
+CALL INCORRECTO                                               
+                                                              
+SALIR_RES_EJE1:                                               
+RET            
+
+EJERCICIO1_1:
+
+MOV [0650H],01H
+CALL VIDEO                                          
+CALL DECORACION                                               
+CALL TRIANGULO2                                               
+CALL C_OPUESTO2                                               
+CALL HIPOTENUSA2                                              
+CALL C_ADYACENTE2                                             
+CALL INICIAR_MOUSE                                            
+CALL BOTONES_OP2   
+CALL EJERCICIO1_ENUNCIADO
+CALL EJE1
+
+RET                                               
+      
+
 EJERCICIO2_ENUNCIADO:                                         
                                                               
 MOV DH,2D                                                     
@@ -845,13 +1080,66 @@ MOV DX, OFFSET TXT_COSECANTE
 CALL IMPRIMIR                                                 
                                                               
 MOV DH,8D                                                     
-MOV DL,19D                                                    
+MOV DL,22D                                                    
 CALL POSICION                                                 
 MOV AL,'='                                                    
 MOV BL,07H                                                    
 CALL IMPRIMIR_C                                               
                                                               
+RET
+
+                                                              
+RES_EJE2:                                                     
+;00 COPUESTO                                                  
+;01 CADYACENTE                                                
+;02 HIPOTENUSA                                                
+MOV BH,[0600H]                                                
+MOV BL,[0602H]                                                
+                                                              
+CMP BH, 02H                                                   
+JNE E2_INC                                                    
+CMP BL, 00H                                                   
+JNE E2_INC
+MOV [0610H], 01H                                                    
+CALL CORRECTO                                                 
+JMP SALIR_RES_EJE2                                            
+                                                              
+E2_INC:
+MOV [0610H], 00H                                                       
+CALL INCORRECTO                                               
+                                                              
+SALIR_RES_EJE2:                                               
 RET                                                           
+                                                              
+                                                              
+EJE2:                                                   
+                                                              
+MOV SI, 00H                                                   
+CALL VER_MOUSE                                                
+MOV SI, 01H                                                   
+CALL VER_MOUSE                                                
+CALL RES_EJE2                                                 
+CALL BOTONES_OP2_FIN                                          
+CALL VER_MOUSE_FIN                                            
+                                                              
+RET  
+
+EJERCICIO1_2:
+MOV [0650H],02H
+CALL VIDEO                                          
+CALL DECORACION                                               
+CALL TRIANGULO2                                               
+CALL C_OPUESTO2                                               
+CALL HIPOTENUSA2                                              
+CALL C_ADYACENTE2                                             
+CALL INICIAR_MOUSE                                            
+CALL BOTONES_OP2   
+CALL EJERCICIO2_ENUNCIADO
+CALL EJE2
+
+RET
+
+                                                           
                                                               
 EJERCICIO3_ENUNCIADO:                                         
                                                               
@@ -884,17 +1172,453 @@ MOV DX, OFFSET TXT_TANGENTE
 CALL IMPRIMIR                                                 
                                                               
 MOV DH,8D                                                     
-MOV DL,19D                                                    
+MOV DL,21D                                                    
 CALL POSICION                                                 
 MOV AL,'='                                                    
 MOV BL,07H                                                    
 CALL IMPRIMIR_C                                               
                                                               
 RET                                                           
+                                                          
+
+RES_EJE3:                                                     
+;00 COPUESTO                                                  
+;01 CADYACENTE                                                
+;02 HIPOTENUSA                                                
+MOV BH,[0600H]                                                
+MOV BL,[0602H]                                                
+                                                              
+CMP BH, 00H                                                   
+JNE E3_INC                                                    
+CMP BL, 01H                                                   
+JNE E3_INC                                                    
+CALL CORRECTO
+MOV [0610H], 01H                                                 
+JMP SALIR_RES_EJE3                                            
+                                                              
+E3_INC:
+MOV [0610H], 00H                                                       
+CALL INCORRECTO                                               
+                                                              
+SALIR_RES_EJE3:                                               
+RET                                                           
+                                                              
+                                                              
+EJE3:                                                   
+                                                              
+MOV SI, 00H                                                   
+CALL VER_MOUSE                                                
+MOV SI, 01H                                                   
+CALL VER_MOUSE                                                
+CALL RES_EJE3                                                
+CALL BOTONES_OP2_FIN                                          
+CALL VER_MOUSE_FIN                                            
+                                                              
+RET
+
+EJERCICIO1_3: 
+MOV [0650H],03H
+CALL VIDEO                                          
+CALL DECORACION                                               
+CALL TRIANGULO2                                               
+CALL C_OPUESTO2                                               
+CALL HIPOTENUSA2                                              
+CALL C_ADYACENTE2                                             
+CALL INICIAR_MOUSE                                            
+CALL BOTONES_OP2   
+CALL EJERCICIO3_ENUNCIADO
+CALL EJE3
+
+RET 
+
+RESPUESTA_EJE2:
+
+MOV DH,10D
+MOV DL,23D
+CALL POSICION
+CALL TECLADO 
+MOV BL,07H
+CALL IMPRIMIR_C
+
+SUB AL,30H
+MOV [0670H], AL
+
+
+
+RET 
+
+EJERCICIO2_1_ENUNCIADO:
+
+                                                              
+MOV DH,2D                                                     
+MOV DL,5D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE1_TITULO                                
+CALL IMPRIMIR                                                 
+                                                              
+MOV DH,2D                                                     
+MOV DL,21D                                                    
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_PROB_P1                               
+CALL IMPRIMIR                                                 
+                                                              
+MOV DH,3D                                                     
+MOV DL,5D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_PROB_P2                               
+CALL IMPRIMIR
+
+MOV DH,5D                                                     
+MOV DL,25D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_COSENO                              
+CALL IMPRIMIR  
+
+MOV DH,5D                                                     
+MOV DL,34D
+CALL POSICION
+MOV BL, 07H
+MOV AL, "="
+CALL IMPRIMIR_C
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "4"
+CALL IMPRIMIR_C
+
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "/"
+CALL IMPRIMIR_C
+
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "5"
+CALL IMPRIMIR_C  
+
+MOV DH,10D
+MOV DL,23D
+
+MOV DH,10D                                                     
+MOV DL,10D
+CALL POSICION
+MOV BL, 07H
+
+MOV AL,"R"
+CALL IMPRIMIR_C
+MOV AL,"E"
+CALL IMPRIMIR_C
+MOV AL,"S"
+CALL IMPRIMIR_C
+MOV AL,"P"
+CALL IMPRIMIR_C
+MOV AL,"U"
+CALL IMPRIMIR_C
+MOV AL,"E"
+CALL IMPRIMIR_C                                                
+MOV AL,"S"
+CALL IMPRIMIR_C
+MOV AL,"T"
+CALL IMPRIMIR_C
+MOV AL,"A"
+CALL IMPRIMIR_C
+MOV AL,":"
+CALL IMPRIMIR_C
+
+
+RET 
+
+VER_RESP_EJE2_1:  
+
+MOV AL,[0670H]
+CMP AL, 03D    ;SI SU RESPUESTA FUE 3 
+JNE VRE1_INC
+
+MOV [0610H], 01H
+CALL CORRECTO
+JMP VRE1_SALIR
+
+VRE1_INC:
+MOV [0610H], 00H    
+CALL INCORRECTO
+
+VRE1_SALIR:
+RET
+         
+       
+EJERCICIO2_1: 
+MOV [0650H],01H
+CALL VIDEO                                          
+CALL DECORACION                                               
+CALL TRIANGULO2
+CALL C_OPUESTO2                                               
+CALL HIPOTENUSA2                                              
+CALL C_ADYACENTE2 
+CALL BOTONES_OP2
+CALL EJERCICIO2_1_ENUNCIADO                                               
+CALL RESPUESTA_EJE2  
+CALL VER_RESP_EJE2_1
+CALL BOTONES_OP2_FIN                                          
+CALL INICIAR_MOUSE                                                               
+CALL VER_MOUSE_FIN2
+
+RET
+
+EJERCICIO2_2_ENUNCIADO:
+
+                                                              
+MOV DH,2D                                                     
+MOV DL,5D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_TITULO                                
+CALL IMPRIMIR                                                 
+                                                              
+MOV DH,2D                                                     
+MOV DL,21D                                                    
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_PROB_P1                               
+CALL IMPRIMIR                                                 
+                                                              
+MOV DH,3D                                                     
+MOV DL,5D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_PROB_P2                               
+CALL IMPRIMIR 
+
+MOV DH,5D                                                     
+MOV DL,25D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_SECANTE                             
+CALL IMPRIMIR  
+
+MOV DH,5D                                                     
+MOV DL,35D
+CALL POSICION
+MOV BL, 07H
+MOV AL, "="
+CALL IMPRIMIR_C
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "7"
+CALL IMPRIMIR_C
+MOV AL, "."
+CALL IMPRIMIR_C
+MOV AL, "8"
+CALL IMPRIMIR_C
+MOV AL, "1"
+CALL IMPRIMIR_C
+
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "/"
+CALL IMPRIMIR_C
+
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "6"
+CALL IMPRIMIR_C  
+
+MOV DH,10D
+MOV DL,23D
+
+MOV DH,10D                                                     
+MOV DL,10D
+CALL POSICION
+MOV BL, 07H
+
+MOV AL,"R"
+CALL IMPRIMIR_C
+MOV AL,"E"
+CALL IMPRIMIR_C
+MOV AL,"S"
+CALL IMPRIMIR_C
+MOV AL,"P"
+CALL IMPRIMIR_C
+MOV AL,"U"
+CALL IMPRIMIR_C
+MOV AL,"E"
+CALL IMPRIMIR_C                                                
+MOV AL,"S"
+CALL IMPRIMIR_C
+MOV AL,"T"
+CALL IMPRIMIR_C
+MOV AL,"A"
+CALL IMPRIMIR_C
+MOV AL,":"
+CALL IMPRIMIR_C
+                                                
+
+
+RET 
+
+VER_RESP_EJE2_2:  
+
+MOV AL,[0670H]
+CMP AL, 05D    ;SI SU RESPUESTA FUE 3 
+JNE VRE2_INC
+
+MOV [0610H], 01H
+CALL CORRECTO
+JMP VRE2_SALIR
+
+VRE2_INC:
+MOV [0610H], 00H    
+CALL INCORRECTO
+
+VRE2_SALIR:
+RET
+
+EJERCICIO2_2: 
+MOV [0650H],02H
+CALL VIDEO                                          
+CALL DECORACION                                               
+CALL TRIANGULO2 
+CALL C_OPUESTO2                                               
+CALL HIPOTENUSA2                                              
+CALL C_ADYACENTE2 
+CALL BOTONES_OP2
+CALL EJERCICIO2_2_ENUNCIADO                                               
+CALL RESPUESTA_EJE2
+CALL VER_RESP_EJE2_2 
+
+CALL BOTONES_OP2_FIN 
+CALL INICIAR_MOUSE                                                               
+CALL VER_MOUSE_FIN2 
+
+RET
+
+EJERCICIO2_3_ENUNCIADO:
+
+                                                              
+MOV DH,2D                                                     
+MOV DL,5D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE3_TITULO                                
+CALL IMPRIMIR                                                 
+                                                              
+MOV DH,2D                                                     
+MOV DL,21D                                                    
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_PROB_P1                               
+CALL IMPRIMIR                                                 
+                                                              
+MOV DH,3D                                                     
+MOV DL,5D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_EJE2_PROB_P2                               
+CALL IMPRIMIR  
+
+MOV DH,5D                                                     
+MOV DL,25D                                                     
+CALL POSICION                                                 
+MOV DX, OFFSET TXT_SENO                              
+CALL IMPRIMIR  
+
+MOV DH,5D                                                     
+MOV DL,34D
+CALL POSICION
+MOV BL, 07H
+MOV AL, "="
+CALL IMPRIMIR_C
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "8"
+CALL IMPRIMIR_C
+
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "/"
+CALL IMPRIMIR_C
+
+MOV AL, " "
+CALL IMPRIMIR_C
+
+MOV AL, "1"
+CALL IMPRIMIR_C
+MOV AL, "0"
+CALL IMPRIMIR_C  
+
+MOV DH,10D
+MOV DL,23D
+
+MOV DH,10D                                                     
+MOV DL,10D
+CALL POSICION
+MOV BL, 07H
+
+MOV AL,"R"
+CALL IMPRIMIR_C
+MOV AL,"E"
+CALL IMPRIMIR_C
+MOV AL,"S"
+CALL IMPRIMIR_C
+MOV AL,"P"
+CALL IMPRIMIR_C
+MOV AL,"U"
+CALL IMPRIMIR_C
+MOV AL,"E"
+CALL IMPRIMIR_C                                                
+MOV AL,"S"
+CALL IMPRIMIR_C
+MOV AL,"T"
+CALL IMPRIMIR_C
+MOV AL,"A"
+CALL IMPRIMIR_C
+MOV AL,":"
+CALL IMPRIMIR_C
+                                               
+
+
+RET     
+
+VER_RESP_EJE2_3:  
+
+MOV AL,[0670H]
+CMP AL, 06D    ;SI SU RESPUESTA FUE 3 
+JNE VRE3_INC
+
+MOV [0610H], 01H
+CALL CORRECTO
+JMP VRE3_SALIR
+
+VRE3_INC:
+MOV [0610H], 00H    
+CALL INCORRECTO
+
+VRE3_SALIR:
+RET
+
+EJERCICIO2_3: 
+MOV [0650H],03H
+CALL VIDEO                                          
+CALL DECORACION                                               
+CALL TRIANGULO2  
+CALL C_OPUESTO2                                               
+CALL HIPOTENUSA2                                              
+CALL C_ADYACENTE2   
+CALL BOTONES_OP2
+CALL EJERCICIO2_3_ENUNCIADO                                               
+CALL RESPUESTA_EJE2
+CALL VER_RESP_EJE2_3 
+
+CALL BOTONES_OP2_FIN
+CALL INICIAR_MOUSE                                                               
+CALL VER_MOUSE_FIN2 
+
+RET  
+
+                                                              
                                                               
 CORRECTO:                                                     
                                                               
-MOV DH,18D                                                    
+MOV DH,13D                                                    
 MOV DL,55D                                                    
 CALL POSICION                                                 
 MOV BL,02H                                                    
@@ -926,7 +1650,7 @@ RET
                                                               
 INCORRECTO:                                                   
                                                               
-MOV DH,18D                                                    
+MOV DH,13D                                                    
 MOV DL,55D                                                    
 CALL POSICION                                                 
 MOV BL,0CH                                                    
@@ -963,8 +1687,45 @@ RET
                                                               
 BOTONES_OP2_FIN:                                              
                                                               
-;SIGUIENTE EJERCICIO                                          
-                                                              
+ 
+MOV AL,[0650H]
+CMP AL,03H
+JNE PRIM_BOTON
+MOV AL,[0610H]
+CMP AL,01H
+JE BOT2                                         
+
+PRIM_BOTON:
+;SIGUIENTE EJERCICIO
+MOV DX,347D                                                   
+MOV CX,500D                                                   
+MOV DI,610D                                                   
+CALL HORIZONTAL                                               
+MOV DI,372D                                                   
+CALL VERTICAL                                                 
+MOV DX,347D                                                   
+MOV CX,500D                                                   
+MOV DI,372D                                                   
+CALL VERTICAL                                                 
+MOV DI,610D                                                   
+CALL HORIZONTAL                                               
+MOV DH,22D      ;POSICION DEL TEXTO DENTRO DEL CUADRO         
+MOV DL,63D                                                    
+CALL POSICION 
+
+MOV AL,[0610H]
+CMP AL,01H
+JNE VOLVER                                               
+MOV DX, OFFSET TXT_SIGUIENTE
+JMP IM                                 
+
+VOLVER: 
+MOV DX, OFFSET TXT_OTRAVEZ 
+IM:
+CALL IMPRIMIR 
+
+;MENU PRINCIPAL
+BOT2:                                                              
 MOV DX,395D                                                   
 MOV CX,500D                                                   
 MOV DI,610D                                                   
@@ -980,8 +1741,9 @@ CALL HORIZONTAL
 MOV DH,25D      ;POSICION DEL TEXTO DENTRO DEL CUADRO         
 MOV DL,63D                                                    
 CALL POSICION                                                 
-MOV DX, OFFSET TXT_SIGUIENTE                                  
-CALL IMPRIMIR                                                 
+MOV DX, OFFSET TXT_MENU                                  
+CALL IMPRIMIR  
+                                   
 
 CALL BTN_SALIR                                                                                                             
                                                               
@@ -990,16 +1752,16 @@ RET
 BOTONES_OP2:                                                  
 ;CATETO OPUESTO                                               
 MOV DX,303D     ;VALOR EN FILA                                
-MOV CX,50D      ;VALOR EN COLUMNA                             
-MOV DI,110D     ;HASTA DONDE SE PINTA LA LINEA                
+MOV CX,53D      ;VALOR EN COLUMNA                             
+MOV DI,113D     ;HASTA DONDE SE PINTA LA LINEA                
 CALL HORIZONTAL                                               
 MOV DI,335D                                                   
 CALL VERTICAL                                                 
 MOV DX,303D                                                   
-MOV CX,50D                                                    
+MOV CX,53D                                                    
 MOV DI,335D                                                   
 CALL VERTICAL                                                 
-MOV DI,110D                                                   
+MOV DI,113D                                                   
 CALL HORIZONTAL                                               
 ;HIPOTENUSA                                                   
 MOV DX,300D                                                   
@@ -1030,7 +1792,7 @@ MOV DI,265D
 CALL HORIZONTAL                                               
 
 CALL BTN_SALIR
-                                                                                                          
+                                                                                                              
                                                               
 RET                                                           
                                                               
@@ -1143,17 +1905,17 @@ JA DENOMINADOR
 JMP SALIR_SELEC_LADO                                          
                                                               
 NUMERADOR:                                                    
-MOV BP,0200H                                                  
+MOV BP,0600H                                                  
 MOV DH,7D                                                     
-MOV DL,21D                                                    
+MOV DL,24D                                                    
                                                               
                                                               
 JMP LADO                                                      
                                                               
 DENOMINADOR:                                                  
-MOV BP,0202H                                                  
+MOV BP,0602H                                                  
 MOV DH,9D                                                     
-MOV DL,21D                                                    
+MOV DL,24D                                                    
                                                               
                                                               
 LADO:                                                         
@@ -1268,135 +2030,161 @@ SOLTO_BOTON_MF:
 INT 33H                                                       
 CMP BX,00H                                                    
 JNE SOLTO_BOTON_MF                                            
-                                                              
-CMP DX,395D             ;INICIO BOTON DE SALIR                
-JB SIGM_FIN1                                                  
+
+                                                             
+CMP DX,395D           ;INICIO BOTON MENU                
+JB SIGM_FIN1.5                                                  
 CMP DX,420D                                                   
-JA SIGM_FIN1                                                  
+JA SIGM_FIN1.5                                                  
 CMP CX,500D                                                   
-JB SIGM_FIN1                                                  
+JB SIGM_FIN1.5                                                  
 CMP CX,610D                                                   
-JA SIGM_FIN1                                                  
-;TO DO                                                        
-JMP SALIR_OP2_MF                                              
-                                                              
-SIGM_FIN1:                                                    
-CMP DX,440D             ;INICIO BOTON DE SALIR                
+JA SIGM_FIN1.5                                                                                                       
+CALL INICIO
+  
+SIGM_FIN1.5:
+MOV AL,[0650H]    ;SI ES EL EJERCICIO 3 QUITAR BOTON SIGUIENTE
+CMP AL,03H
+JNE SIGM_FIN1
+MOV AL,[0610H]
+CMP AL, 01H
+JE SIGM_FIN2
+
+
+SIGM_FIN1:            ;INICIO BOTON SIGUIENTE                                            
+CMP DX,350D                             
 JB SIGM_FIN2                                                  
-CMP DX,465D                                                   
+CMP DX,375D                                                   
 JA SIGM_FIN2                                                  
 CMP CX,500D                                                   
 JB SIGM_FIN2                                                  
 CMP CX,610D                                                   
-JA SIGM_FIN2                                                  
-CALL SALIR                                                    
+JA SIGM_FIN2
+
+MOV AH,[0610H]     ;VERIFICAR SI FUE CORRECTA LA RESPUESTA
+CMP AH, 01H
+JE SALIR_OP2_MF
+
+                                                   
+MOV AL,[0650H]      ;SINO VOLVER A LLAMAR AL EJERCICIO
+CMP AL, 01H
+JNE COMP2
+CALL EJERCICIO1_1
+JMP SALIR_OP2_MF
+
+COMP2:
+CMP AL,02H
+JNE COMP3
+CALL EJERCICIO1_2
+JMP SALIR_OP2_MF
+
+COMP3:
+
+CALL EJERCICIO1_3
+
+JMP SALIR_OP2_MF                                                            
+                                          
                                                               
 SIGM_FIN2:                                                    
+CMP DX,440D           ;INICIO BOTON DE SALIR                
+JB SIGM_FIN3                                                  
+CMP DX,465D                                                   
+JA SIGM_FIN3                                                  
+CMP CX,500D                                                   
+JB SIGM_FIN3                                                  
+CMP CX,610D                                                   
+JA SIGM_FIN3                                                  
+CALL SALIR                                                    
+                                                              
+SIGM_FIN3:                                                    
 JMP VER_MOUSE_FIN                                             
                                                               
 SALIR_OP2_MF:                                                 
-RET                                                           
+RET
+
+
+VER_MOUSE_FIN2:                                                
+MOV AX,03H                                                    
+INT 33H                                                       
+CMP BX, 01H                                                   
+JNE VER_MOUSE_FIN2                                             
                                                               
-RES_EJE1:                                                     
-;00 COPUESTO                                                  
-;01 CADYACENTE                                                
-;02 HIPOTENUSA                                                
-MOV BH,[0200H]                                                
-MOV BL,[0202H]                                                
+SOLTO_BOTON_MF2:                                               
+INT 33H                                                       
+CMP BX,00H                                                    
+JNE SOLTO_BOTON_MF2                                            
+
+                                                             
+CMP DX,395D           ;INICIO BOTON MENU                
+JB SIGM2_FIN1.5                                                  
+CMP DX,420D                                                   
+JA SIGM2_FIN1.5                                                  
+CMP CX,500D                                                   
+JB SIGM2_FIN1.5                                                  
+CMP CX,610D                                                   
+JA SIGM2_FIN1.5                                                                                                       
+CALL INICIO
+  
+SIGM2_FIN1.5:
+MOV AL,[0650H]    ;SI ES EL EJERCICIO 3 QUITAR BOTON SIGUIENTE
+CMP AL,03H
+JNE SIGM2_FIN1
+MOV AL,[0610H]
+CMP AL, 01H
+JE SIGM2_FIN2
+
+
+SIGM2_FIN1:            ;INICIO BOTON SIGUIENTE                                            
+CMP DX,350D                             
+JB SIGM2_FIN2                                                  
+CMP DX,375D                                                   
+JA SIGM2_FIN2                                                  
+CMP CX,500D                                                   
+JB SIGM2_FIN2                                                  
+CMP CX,610D                                                   
+JA SIGM2_FIN2
+
+MOV AH,[0610H]     ;VERIFICAR SI FUE CORRECTA LA RESPUESTA
+CMP AH, 01H
+JE SALIR_OP2_MF2
+
+                                                   
+MOV AL,[0650H]      ;SINO VOLVER A LLAMAR AL EJERCICIO
+CMP AL, 01H
+JNE COMP2_2
+CALL EJERCICIO2_1
+JMP SALIR_OP2_MF2
+
+COMP2_2:
+CMP AL,02H
+JNE COMP2_3
+CALL EJERCICIO2_2
+JMP SALIR_OP2_MF2
+
+COMP2_3:
+
+CALL EJERCICIO2_3
+
+JMP SALIR_OP2_MF2                                                            
+                                          
                                                               
-CMP BH, 01H                                                   
-JNE E1_INC                                                    
-CMP BL, 02H                                                   
-JNE E1_INC                                                    
-CALL CORRECTO                                                 
-JMP SALIR_RES_EJE1                                            
+SIGM2_FIN2:                                                    
+CMP DX,440D           ;INICIO BOTON DE SALIR                
+JB SIGM2_FIN3                                                  
+CMP DX,465D                                                   
+JA SIGM2_FIN3                                                  
+CMP CX,500D                                                   
+JB SIGM2_FIN3                                                  
+CMP CX,610D                                                   
+JA SIGM2_FIN3                                                  
+CALL SALIR                                                    
                                                               
-E1_INC:                                                       
-CALL INCORRECTO                                               
+SIGM2_FIN3:                                                    
+JMP VER_MOUSE_FIN2
                                                               
-SALIR_RES_EJE1:                                               
-RET                                                           
-                                                              
-                                                              
-EJERCICIO1:                                                   
-                                                              
-MOV SI, 00H                                                   
-CALL VER_MOUSE                                                
-MOV SI, 01H                                                   
-CALL VER_MOUSE                                                
-CALL RES_EJE1                                                 
-CALL BOTONES_OP2_FIN                                          
-                                                              
-CALL VER_MOUSE_FIN                                            
-                                                              
-RET                                                           
-                                                              
-RES_EJE2:                                                     
-;00 COPUESTO                                                  
-;01 CADYACENTE                                                
-;02 HIPOTENUSA                                                
-MOV BH,[0200H]                                                
-MOV BL,[0202H]                                                
-                                                              
-CMP BH, 02H                                                   
-JNE E2_INC                                                    
-CMP BL, 00H                                                   
-JNE E2_INC                                                    
-CALL CORRECTO                                                 
-JMP SALIR_RES_EJE2                                            
-                                                              
-E2_INC:                                                       
-CALL INCORRECTO                                               
-                                                              
-SALIR_RES_EJE2:                                               
-RET                                                           
-                                                              
-                                                              
-EJERCICIO2:                                                   
-                                                              
-MOV SI, 00H                                                   
-CALL VER_MOUSE                                                
-MOV SI, 01H                                                   
-CALL VER_MOUSE                                                
-CALL RES_EJE2                                                 
-CALL BOTONES_OP2_FIN                                          
-CALL VER_MOUSE_FIN                                            
-                                                              
-RET                                                           
-                                                              
-RES_EJE3:                                                     
-;00 COPUESTO                                                  
-;01 CADYACENTE                                                
-;02 HIPOTENUSA                                                
-MOV BH,[0200H]                                                
-MOV BL,[0202H]                                                
-                                                              
-CMP BH, 00H                                                   
-JNE E3_INC                                                    
-CMP BL, 01H                                                   
-JNE E3_INC                                                    
-CALL CORRECTO                                                 
-JMP SALIR_RES_EJE3                                            
-                                                              
-E3_INC:                                                       
-CALL INCORRECTO                                               
-                                                              
-SALIR_RES_EJE3:                                               
-RET                                                           
-                                                              
-                                                              
-EJERCICIO3:                                                   
-                                                              
-MOV SI, 00H                                                   
-CALL VER_MOUSE                                                
-MOV SI, 01H                                                   
-CALL VER_MOUSE                                                
-CALL RES_EJE3                                                 
-CALL BOTONES_OP2_FIN                                          
-CALL VER_MOUSE_FIN                                            
-                                                              
-RET                                                           
-                                                              
+SALIR_OP2_MF2:                                                 
+RET
+                                                                                                                    
                                                               
 TRIANGULO2:                                                   
 MOV DX,270D   ;INICIO VERTICE SUPERIOR                        
@@ -1440,6 +2228,7 @@ CALL POSICION
 MOV DX, OFFSET TXT_C_ADYACENTE                                
 CALL IMPRIMIR                                                 
 RET                                                           
+                                
                                                               
 ;--------------------------------------------------------------
 
