@@ -2769,14 +2769,23 @@ TXT_SECANTE1 DB " SECANTE = HIPOTENUSA / CATETO ADYACENTE$"
 TXT_COTANGENTE1 DB " COTANGENTE = CATETO ADYACENTE / CATETO OPUESTO$"
 TXT_SALIR2 DB 10H,"   SALIR   ",11H,"$" 
 TXT_MENU DB 10H,"   MENU   ",11H,"$"
+TXT_OTRAVEZ DB 10H,"  OTRA VEZ ",11H,"$" 
+                               
+TXT_EJE_OP1 DB "1. Formar la razon trigonometrica.$"
+TXT_EJE_OP2 DB "2. Calcular el lado faltante.$"
+TXT_EJE_OP3 DB "3. Volver al menu principal.$"
+
                                
 TXT_SIGUIENTE DB " SIGUIENTE ",10H,"$"                                      
-TXT_EJE1_TITULO DB "Ejercicio #1:$"
+TXT_EJE1_TITULO DB "Ejercicio #1:$" 
+TXT_EJE2_TITULO DB "Ejercicio #2:$"
+TXT_EJE3_TITULO DB "Ejercicio #3:$"
+
 TXT_EJE1_PROB_P1 DB "Seleccione los lados del triangulo que conforman la $"
 TXT_EJE1_PROB_P2 DB "siguiente funcion trigonometrica: $"
 
-TXT_EJE2_TITULO DB "Ejercicio #2:$"
-TXT_EJE3_TITULO DB "Ejercicio #3:$"
+TXT_EJE2_PROB_P1 DB "Ingrese el lado faltante del triangulo conociendo $"
+TXT_EJE2_PROB_P2 DB "que el valor de: $"
 
 ;---------------------------------------------------------
 ;---------------NO IMPLEMENTADAS--------------------------
